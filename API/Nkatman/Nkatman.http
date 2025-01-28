@@ -1,0 +1,6 @@
+@Nkatman_HostAddress = http://localhost:5283
+
+GET {{Nkatman_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nkatman.API", "Nkatman.API.csproj", "{DBDD65D8-051D-48AD-AEDA-231935D1AA58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nkatman.Core", "..\nkatman.Core\nkatman.Core.csproj", "{0345F2A2-E462-4457-BBC7-2A141AEF9910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nkatman.Repository", "..\nkatman.Repository\nkatman.Repository.csproj", "{AFE0A0DC-F6AA-4A66-A52E-E4C16A29C3B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nkatman.Service", "..\nkatman.Service\nkatman.Service.csproj", "{B7D4BC32-B46B-4B14-AFD7-941FB11462EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBDD65D8-051D-48AD-AEDA-231935D1AA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBDD65D8-051D-48AD-AEDA-231935D1AA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBDD65D8-051D-48AD-AEDA-231935D1AA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBDD65D8-051D-48AD-AEDA-231935D1AA58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0345F2A2-E462-4457-BBC7-2A141AEF9910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0345F2A2-E462-4457-BBC7-2A141AEF9910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0345F2A2-E462-4457-BBC7-2A141AEF9910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0345F2A2-E462-4457-BBC7-2A141AEF9910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE0A0DC-F6AA-4A66-A52E-E4C16A29C3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE0A0DC-F6AA-4A66-A52E-E4C16A29C3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE0A0DC-F6AA-4A66-A52E-E4C16A29C3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE0A0DC-F6AA-4A66-A52E-E4C16A29C3B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D4BC32-B46B-4B14-AFD7-941FB11462EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D4BC32-B46B-4B14-AFD7-941FB11462EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D4BC32-B46B-4B14-AFD7-941FB11462EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D4BC32-B46B-4B14-AFD7-941FB11462EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
