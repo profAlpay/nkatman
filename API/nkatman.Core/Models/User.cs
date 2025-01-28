@@ -17,5 +17,10 @@ namespace nkatman.Core.Models
         public byte[] PasswordSalt { get; set; }
 
         public byte[] PasswordHash { get; set; }
+
+        public Department Department { get; set; }
+
+        public Group Group { get; set; }
+
     }
 }

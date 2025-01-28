@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace nkatman.Core.Models
 {
-    public class account: BaseEntity
+    public class Sale: BaseEntity
     {
         public int CustomerId { get; set; }
 
@@ -18,6 +18,9 @@ namespace nkatman.Core.Models
 
         public double   TotalPrice { get; set; }
 
-        public bool İsPaid { get; set; }
+       
+        public customer customer { get; set; }
+
+        public Product Product { get; set; }
     }
 }

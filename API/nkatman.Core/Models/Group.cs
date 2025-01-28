@@ -11,5 +11,11 @@ namespace nkatman.Core.Models
     {
         public string Name { get; set; }
 
+        public ICollection<User> users { get; set; }
+
+        
+
+        public ICollection<GroupInRole> GroupInRols { get; set; }
+
     }
 }
