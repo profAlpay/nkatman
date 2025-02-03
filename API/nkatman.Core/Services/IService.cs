@@ -5,14 +5,14 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace nkatman.Core.Repositories
+namespace nkatman.Core.Services
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IService<T> where T : class
+
     {
         IQueryable<T> GetAll();
         Task<T> GetByIdAsync(int id);
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
-
 
 
         int Count();
@@ -22,8 +22,5 @@ namespace nkatman.Core.Repositories
         void ChangeStatus(T entity);
 
         Task AddAsync(T entity);
-
-
-
     }
 }
