@@ -23,6 +23,8 @@ namespace nkatman.Core.Repositories
 
         Task AddAsync(T entity);
 
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
+
 
 
     }
