@@ -14,9 +14,11 @@ namespace nkatman.Repository.UnitOfWorks
         {
             _context.SaveChanges();
         }
-        public async Task commitAsync()
+        public async Task CommitAsync()
         {
            await _context.SaveChangesAsync();
         }
+
+        
     }
 }

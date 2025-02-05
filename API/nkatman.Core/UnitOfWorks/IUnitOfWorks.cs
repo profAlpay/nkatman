@@ -8,5 +8,7 @@ namespace nkatman.Core.UnitOfWorks
 {
     public interface IUnitOfWorks 
     {
+        void Commit();
+        Task CommitAsync();
     }
 }

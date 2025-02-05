@@ -1,7 +1,9 @@
 
 
 using Microsoft.EntityFrameworkCore;
+using nkatman.Core.UnitOfWorks;
 using nkatman.Repository;
+using nkatman.Repository.UnitOfWorks;
 using nkatman.Service;
 
 
@@ -26,7 +28,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("sqlserver")));
 
-
+// builder.Services.AddScoped(typeof(IUnitOfWorks), typeof(UnitOfWorks));
 
 var app = builder.Build();
 
