@@ -5,6 +5,7 @@ using nkatman.Core.UnitOfWorks;
 using nkatman.Repository;
 using nkatman.Repository.UnitOfWorks;
 using nkatman.Service;
+using nkatman.Service.Mappings;
 
 
 
@@ -24,6 +25,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("sqlserver")));
