@@ -24,12 +24,12 @@ namespace nkatman.Core.DTOs
 
         }
 
-        public CustomResponseDto<T> Fail(int statusCode, List<string> errors)
+        public  CustomResponseDto<T> Fail(int statusCode, List<string> errors)
         {
             return new CustomResponseDto<T> { StatusCode = statusCode, Errors = errors  };
         }
 
-        public CustomResponseDto<T> Fail(int statusCode, string error)
+        public  CustomResponseDto<T> Fail(int statusCode, string error)
         {
             return new CustomResponseDto<T> { StatusCode = statusCode, Errors = new List<string> { error } };
         }
