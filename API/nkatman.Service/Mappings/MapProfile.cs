@@ -11,7 +11,7 @@ namespace nkatman.Service.Mappings
 {
     public class MapProfile : Profile
     {
-        protected MapProfile()
+        public MapProfile()
         {
             CreateMap<Customer,CustomerDto>().ReverseMap();
             CreateMap<Payment, PaymentDto>().ReverseMap();
