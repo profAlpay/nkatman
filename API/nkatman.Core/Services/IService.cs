@@ -21,7 +21,7 @@ namespace nkatman.Core.Services
 
         void ChangeStatus(T entity);
 
-        Task AddAsync(T entity);
+        Task<T> AddAsync(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
     }
 }

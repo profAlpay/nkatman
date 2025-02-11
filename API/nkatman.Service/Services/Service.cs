@@ -23,7 +23,7 @@ namespace nkatman.Service.Services
             _unitOfWorks= unitOfWorks;
         }
 
-        public virtual async Task AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
             entity.CreatedDate = DateTime.Now;
             entity.UpdatedDate = DateTime.Now;
@@ -31,6 +31,7 @@ namespace nkatman.Service.Services
             await _repository.AddAsync(entity);
 
             await _unitOfWorks.CommitAsync();
+            return entity;
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
