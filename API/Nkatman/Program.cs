@@ -38,10 +38,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddTransient<IcustomerService, CustomerService>();
 
+builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient<IUnitOfWorks, UnitOfWorks>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
