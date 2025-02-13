@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace nkatman.Core.DTOs
+namespace nkatman.Core.DTOs.UpdateDTOs
 {
-    public class BaseDto
+    public class PaymentUpdateDto
     {
         public int Id { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public int CustomerId { get; set; }
 
+        public double Amount { get; set; }
     }
 }

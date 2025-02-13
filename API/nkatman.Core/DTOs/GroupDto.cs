@@ -12,7 +12,7 @@ namespace nkatman.Core.DTOs
 
         public string Name { get; set; }
 
-        public List<User> users { get; set; }
+        
 
 
 

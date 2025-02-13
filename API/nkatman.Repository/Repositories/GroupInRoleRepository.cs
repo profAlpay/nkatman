@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace nkatman.Repository.Repositories
 {
-    public class GrupInRoleRepository(AppDbContext context):GenericRepository<GroupInRole>(context), IGroupInRoleRepository
+    public class GroupInRoleRepository(AppDbContext context):GenericRepository<GroupInRole>(context), IGroupInRoleRepository
     {
     }
 }
