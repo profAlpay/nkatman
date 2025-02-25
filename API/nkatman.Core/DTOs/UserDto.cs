@@ -3,7 +3,8 @@
     public class UserDto : BaseDto
     {
         public string Name { get; set; }
-   
+
+        public string Email { get; set; }
         public string PaswordDto { get; set; }
 
         public int DepartmentId { get; set; }
