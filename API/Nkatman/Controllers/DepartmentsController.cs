@@ -22,7 +22,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var departments = _departmentService.GetAll();
+            var departments = _departmentService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<DepartmentDto>>(departments).ToList();
 
 

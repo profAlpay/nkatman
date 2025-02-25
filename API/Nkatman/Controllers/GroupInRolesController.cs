@@ -22,7 +22,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var groupInRoles = _groupInRoleService.GetAll();
+            var groupInRoles = _groupInRoleService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<GroupInRoleDto>>(groupInRoles).ToList();
 
 
@@ -58,8 +58,19 @@ namespace Nkatman.API.Controllers
             currentGroupInRole.GroupId = groupInRoleDto.GroupId;
             currentGroupInRole.RoleId = groupInRoleDto.RoleId;
 
+            try
+            {
 
-            _groupInRoleService.Update(currentGroupInRole);
+                _groupInRoleService.Update(currentGroupInRole);
+            }
+            catch (Exception ex)
+            {
+
+
+                return CreateActionResult(new CustomResponseDto<GroupInRoleUpdateDto>().Fail(400,ex.Message));
+
+
+            }
 
             return CreateActionResult(new CustomResponseDto<GroupInRoleUpdateDto>().Success(204));
 

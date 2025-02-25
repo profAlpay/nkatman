@@ -13,7 +13,7 @@ namespace nkatman.Core.DTOs
 
         public double UnitPrice { get; set; }
 
-        public List<Sale> Sales { get; set; }
+        //public List<Sale> Sales { get; set; }
 
 
     }

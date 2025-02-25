@@ -20,9 +20,9 @@ namespace nkatman.Core.DTOs
         public double TotalPrice { get; set; }
 
 
-        public CustomerDto customer { get; set; }
+        //public CustomerDto customer { get; set; }
 
-        public ProductDto Product { get; set; }
+        //public ProductDto Product { get; set; }
 
     }
 }

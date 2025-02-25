@@ -11,7 +11,7 @@ namespace nkatman.Core.DTOs
     {
         public string Name { get; set; }
 
-        public ICollection<Payment> Payments { get; set; }
-        public ICollection<Sale> Sales { get; set; }
+        //public virtual ICollection<Payment> Payments { get; set; }
+        //public  virtual ICollection<Sale> Sales { get; set; }
     }
 }

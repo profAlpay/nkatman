@@ -22,7 +22,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var payments = _paymentService.GetAll();
+            var payments = _paymentService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<PaymentDto>>(payments).ToList();
 
 

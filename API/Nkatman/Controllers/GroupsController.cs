@@ -22,7 +22,8 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var groups = _groupService.GetAll();
+            //var groups = _groupService.GetAll().Where(g => g.Name.Contains("Admin")).ToList();
+            var groups = _groupService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<GroupDto>>(groups).ToList();
 
 

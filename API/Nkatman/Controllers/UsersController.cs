@@ -5,6 +5,8 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Microsoft.EntityFrameworkCore;
+using nkatman.Service.Hashing;
 
 namespace Nkatman.API.Controllers
 {
@@ -22,7 +24,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<UserDto>>(users).ToList();
 
 
@@ -43,12 +45,25 @@ namespace Nkatman.API.Controllers
             processedEntity.UpdateBy = userId;
 
             processedEntity.CreatedBy = userId;
+            byte[] hashh = null;
+            byte[] solt = null;
+            HashingHelper.CreatePassword(userDto.PaswordDto, out hashh, out solt);
 
-            var User = await _userService.AddAsync(processedEntity);
+            processedEntity.PasswordHash = hashh;
+            processedEntity.PasswordSalt = solt;
+            try
+            {
+               await _userService.AddAsync(processedEntity);
+            }
+            catch (Exception ex)
+            {
 
-            var userResponseDto = _mapper.Map<UserDto>(User);
+              
+            }
 
-            var response = new CustomResponseDto<UserDto>().Success(201, userDto);
+            var userResponseDto = _mapper.Map<UserDto>(processedEntity);
+
+            var response = new CustomResponseDto<UserDto>().Success(201, userResponseDto);
 
 
             return CreateActionResult(response);
@@ -65,6 +80,7 @@ namespace Nkatman.API.Controllers
             currentUser.Name = userDto.Name;
             currentUser.DepartmentId = userDto.DepartmentId;
             currentUser.GroupId = userDto.GroupId;
+       
 
 
             _userService.Update(currentUser);

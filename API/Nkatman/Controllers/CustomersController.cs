@@ -23,7 +23,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-           var customers =  _customerService.GetAll();
+           var customers =  _customerService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<CustomerDto>>(customers).ToList();
           
 
@@ -49,7 +49,7 @@ namespace Nkatman.API.Controllers
 
             var customerResponseDto = _mapper.Map<CustomerDto>(Customer);
 
-            var response = new CustomResponseDto<CustomerDto>().Success(201, customerDto);
+            var response = new CustomResponseDto<CustomerDto>().Success(201, customerResponseDto);
             
 
             return  CreateActionResult(response);

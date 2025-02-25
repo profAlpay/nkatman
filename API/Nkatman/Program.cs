@@ -3,6 +3,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using nkatman.Core.Repositories;
 using nkatman.Core.Services;
 using nkatman.Core.UnitOfWorks;
@@ -14,14 +15,31 @@ using nkatman.Service.Services;
 using Nkatman.API.Filters;
 using Nkatman.API.Middlewares;
 using Nkatman.API.Modules;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
-//add jwt bearer - appsetting
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+  options =>
+  {
+      options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+      {
+          ValidateAudience = true,
+          ValidateIssuer = true,
+          ValidateIssuerSigningKey = true,
+          ValidAudience = builder.Configuration["Token:Audience"],
+          ValidIssuer = builder.Configuration["Token:Issuer"],
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"])),
+          ValidateLifetime = false,
+          ClockSkew = TimeSpan.Zero
+      };
+  }
+    );
 
 // rate limiter
 

@@ -22,7 +22,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var roles = _roleService.GetAll();
+            var roles = _roleService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<RoleDto>>(roles).ToList();
 
 

@@ -19,7 +19,7 @@ namespace nkatman.Core.Models
 
         public int UpdateBy { get; set; }
 
-        public bool  Status { get; set; }
+        public bool Status { get; set; }
     }
 
 }

@@ -22,7 +22,7 @@ namespace Nkatman.API.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var sales = _saleService.GetAll();
+            var sales = _saleService.GetAll().ToList();
             var dtos = _mapper.Map<IEnumerable<SaleDto>>(sales).ToList();
 
 
