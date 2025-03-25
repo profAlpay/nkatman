@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace nkatman.Service.Services
 {
-    public class TokenHandler : ITokenHandler
+    public class MyTokenHandler : ITokenHandler
     {
         private readonly IConfiguration _Configuration;
 
-        public TokenHandler(IConfiguration configuration)
+        public MyTokenHandler(IConfiguration configuration)
         {
             _Configuration = configuration;
         }

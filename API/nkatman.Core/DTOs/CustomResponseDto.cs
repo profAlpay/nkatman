@@ -14,6 +14,11 @@ namespace nkatman.Core.DTOs
 
         public List<string> Errors { get; set; }
 
+        public CustomResponseDto()
+        {
+                
+        }
+
         public CustomResponseDto<T> Success(int statusCode, T data)
         {
             return new CustomResponseDto<T> { Data = data, StatusCode = statusCode, Errors = null };

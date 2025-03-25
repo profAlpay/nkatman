@@ -5,6 +5,8 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Nkatman.API.Filters;
+using nkatman.Service.Services;
 
 namespace Nkatman.API.Controllers
 {
@@ -30,6 +32,33 @@ namespace Nkatman.API.Controllers
             return CreateActionResult(result);
 
         }
+
+        [ServiceFilter(typeof(NotFoundFilter<GroupInRole>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var groupInRole = await _groupInRoleService.GetByIdAsync(id); 
+
+            var groupInRoleDto = _mapper.Map<GroupInRoleDto>(groupInRole);
+
+            var nesne = new CustomResponseDto<GroupInRoleDto>();
+            return CreateActionResult(nesne.Success(200, groupInRoleDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<GroupInRole>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            //get user from token
+            int GroupInRoleId = 1;
+            var GroupInRole = await _groupInRoleService.GetByIdAsync(id);
+            GroupInRole.UpdateBy = GroupInRoleId;
+
+            _groupInRoleService.ChangeStatus(GroupInRole);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
+        }
+
 
         [HttpPost]
 
@@ -66,11 +95,9 @@ namespace Nkatman.API.Controllers
             catch (Exception ex)
             {
 
-
                 return CreateActionResult(new CustomResponseDto<GroupInRoleUpdateDto>().Fail(400,ex.Message));
 
-
-            }
+                            }
 
             return CreateActionResult(new CustomResponseDto<GroupInRoleUpdateDto>().Success(204));
 

@@ -6,6 +6,8 @@ using nkatman.Core.DTOs;
 using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.Models;
 using nkatman.Core.Services;
+using Nkatman.API.Filters;
+using nkatman.Service.Services;
 
 namespace Nkatman.API.Controllers
 {
@@ -31,6 +33,33 @@ namespace Nkatman.API.Controllers
             return CreateActionResult(result);
 
         }
+
+        [ServiceFilter(typeof(NotFoundFilter<Customer>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var Customer = await _customerService.GetByIdAsync(id);
+
+            var CustomerDto = _mapper.Map<CustomerDto>(Customer);
+
+            var nesne = new CustomResponseDto<CustomerDto>();
+            return CreateActionResult(nesne.Success(200, CustomerDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Customer>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            //get user from token
+            int CustomerId = 1;
+            var Customer = await _customerService.GetByIdAsync(id);
+            Customer.UpdateBy = CustomerId;
+
+            _customerService.ChangeStatus(Customer);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
+        }
+
 
         [HttpPost]
 

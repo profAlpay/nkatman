@@ -5,6 +5,7 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Nkatman.API.Filters;
 
 namespace Nkatman.API.Controllers
 {
@@ -30,6 +31,28 @@ namespace Nkatman.API.Controllers
             var result = new CustomResponseDto<List<GroupDto>>().Success(200, dtos);
             return CreateActionResult(result);
 
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Group>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var group = await _groupService.GetByIdAsync(id);
+            var groupDto = _mapper.Map<GroupDto>(group);
+
+            var response = new CustomResponseDto<GroupDto>().Success(200, groupDto);
+            return CreateActionResult(response);
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Group>))]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var group = await _groupService.GetByIdAsync(id);
+            group.UpdatedBy = 1; // TODO: Kullanıcı kimliği token'dan alınmalı
+            _groupService.ChangeStatus(group);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
         }
 
         [HttpPost]

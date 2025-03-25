@@ -24,7 +24,7 @@ namespace Nkatman.API.Modules
             builder.RegisterType<UnitOfWorks>().As<IUnitOfWorks>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<TokenHandler>().As<ITokenHandler>();
+            builder.RegisterType<MyTokenHandler>().As<ITokenHandler>();
 
             var apiAssembly =  Assembly.GetExecutingAssembly();
             var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext));

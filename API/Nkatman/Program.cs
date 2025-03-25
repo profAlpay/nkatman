@@ -45,6 +45,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 // add output cache
 
+// ToDo fjfjfmfff
 
 
 builder.Services.AddControllers();
@@ -76,6 +77,8 @@ builder.Services.AddTransient<ISaleRepository, SaleRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+
+builder.Services.AddTransient<ITokenHandler, MyTokenHandler>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 

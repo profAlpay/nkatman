@@ -11,6 +11,8 @@ namespace nkatman.Core.Models
     {
         public string Name { get; set; }
 
+        public int? UpdatedBy { get; set; }
+
         public virtual ICollection<User> users { get; set; }
 
         

@@ -7,6 +7,7 @@ using nkatman.Core.Services;
 using nkatman.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using nkatman.Service.Hashing;
+using Nkatman.API.Filters;
 
 namespace Nkatman.API.Controllers
 {
@@ -33,6 +34,36 @@ namespace Nkatman.API.Controllers
 
         }
 
+        // pagination
+
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+
+            var userDto = _mapper.Map<UserDto>(user);
+
+            var nesne = new CustomResponseDto<UserDto>();
+            return  CreateActionResult(nesne.Success(200, userDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            //get user from token
+            int userId = 1;
+            var user = await _userService.GetByIdAsync(id);
+            user.UpdateBy = userId;
+
+            _userService.ChangeStatus(user);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
+        }
+
+
+
         [HttpPost]
 
         public async Task<IActionResult> Save(UserDto userDto)
@@ -53,12 +84,12 @@ namespace Nkatman.API.Controllers
             processedEntity.PasswordSalt = solt;
             try
             {
-               await _userService.AddAsync(processedEntity);
+                await _userService.AddAsync(processedEntity);
             }
             catch (Exception ex)
             {
 
-              
+
             }
 
             var userResponseDto = _mapper.Map<UserDto>(processedEntity);
@@ -80,13 +111,24 @@ namespace Nkatman.API.Controllers
             currentUser.Name = userDto.Name;
             currentUser.DepartmentId = userDto.DepartmentId;
             currentUser.GroupId = userDto.GroupId;
-       
+
 
 
             _userService.Update(currentUser);
 
             return CreateActionResult(new CustomResponseDto<UserUpdateDto>().Success(204));
 
+        }
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        {
+            Token token = await _userService.Login(userLoginDto);
+            if (token == null)
+            {
+                return CreateActionResult(new CustomResponseDto<Token>().Fail(401, "Bilgiler Uyusmuyor"));
+            }
+           return  CreateActionResult(new CustomResponseDto<Token>().Success(200, token));
         }
     }
 }

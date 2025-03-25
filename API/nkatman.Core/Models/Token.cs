@@ -15,3 +15,4 @@ namespace nkatman.Core.Models
         public string RefreshToken { get; set; }
     }
 }
+  
