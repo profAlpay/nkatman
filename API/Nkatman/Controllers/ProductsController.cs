@@ -5,6 +5,8 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Nkatman.API.Filters;
+using nkatman.Service.Services;
 
 namespace Nkatman.API.Controllers
 {
@@ -14,6 +16,8 @@ namespace Nkatman.API.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        //get user from token 
+        int userId = 1;
         public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
@@ -23,12 +27,38 @@ namespace Nkatman.API.Controllers
         public async Task<IActionResult> All()
         {
             var products = _productService.GetAll().ToList();
-            var dtos = _mapper.Map<IEnumerable<ProductDto>>(products).ToList();
+            var productDto = _mapper.Map<IEnumerable<ProductDto>>(products).ToList();
 
 
-            var result = new CustomResponseDto<List<ProductDto>>().Success(200, dtos);
+            var result = new CustomResponseDto<List<ProductDto>>().Success(200, productDto);
             return CreateActionResult(result);
 
+        }
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var product = await _productService.GetByIdAsync(id);
+
+            var productDto = _mapper.Map<ProductDto>(product);
+
+            var nesne = new CustomResponseDto<ProductDto>();
+            return CreateActionResult(nesne.Success(200, productDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Payment>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+          
+            //get user from token
+            int PaymentId = 1;
+            var product = await _productService.GetByIdAsync(id);
+            product.UpdateBy = userId; 
+
+            _productService.ChangeStatus(product);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
         }
 
         [HttpPost]

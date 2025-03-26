@@ -5,6 +5,8 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Nkatman.API.Filters;
+using nkatman.Service.Services;
 
 namespace Nkatman.API.Controllers
 {
@@ -29,6 +31,31 @@ namespace Nkatman.API.Controllers
             var result = new CustomResponseDto<List<SaleDto>>().Success(200, dtos);
             return CreateActionResult(result);
 
+        }
+        [ServiceFilter(typeof(NotFoundFilter<Sale>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var Sale = await _saleService.GetByIdAsync(id);
+
+            var SaleDto = _mapper.Map<SaleDto>(Sale);
+
+            var nesne = new CustomResponseDto<SaleDto>();
+            return CreateActionResult(nesne.Success(200, SaleDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Sale>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            //get user from token
+            int SaleId = 1;
+            var Sale = await _saleService.GetByIdAsync(id);
+            Sale.UpdateBy = SaleId;
+
+            _saleService.ChangeStatus(Sale);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
         }
 
         [HttpPost]

@@ -10,5 +10,7 @@ namespace nkatman.Repository.Repositories
 {
     public class GroupRepository(AppDbContext context): GenericRepository<Group>(context),IGroupRepository
     {
+
+       
     }
 }

@@ -5,6 +5,8 @@ using nkatman.Core.DTOs.UpdateDTOs;
 using nkatman.Core.DTOs;
 using nkatman.Core.Services;
 using nkatman.Core.Models;
+using Nkatman.API.Filters;
+using nkatman.Service.Services;
 
 namespace Nkatman.API.Controllers
 {
@@ -29,6 +31,32 @@ namespace Nkatman.API.Controllers
             var result = new CustomResponseDto<List<PaymentDto>>().Success(200, dtos);
             return CreateActionResult(result);
 
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Payment>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var payment = await _paymentService.GetByIdAsync(id);
+
+            var paymentDto = _mapper.Map<PaymentDto>(payment);
+
+            var nesne = new CustomResponseDto<PaymentDto>();
+            return CreateActionResult(nesne.Success(200, paymentDto));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Payment>))]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            //get user from token
+            int PaymentId = 1;
+            var Payment = await _paymentService.GetByIdAsync(id);
+            Payment.UpdateBy = PaymentId;
+
+            _paymentService.ChangeStatus(Payment);
+
+            return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
         }
 
         [HttpPost]
