@@ -64,6 +64,8 @@ namespace Nkatman.API.Controllers
 
         public async Task<IActionResult> Save(GroupDto groupDto)
         {
+
+            try { 
             //get user from token 
             var userId = 1;
             groupDto.CreatedDate = DateTime.Now;
@@ -82,6 +84,16 @@ namespace Nkatman.API.Controllers
 
 
             return CreateActionResult(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Hata oluştu.",
+                    InnerException = ex.InnerException?.Message,
+                    StackTrace = ex.StackTrace
+                });
+            }
         }
 
         [HttpPut]
