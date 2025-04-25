@@ -10,5 +10,5 @@ namespace nkatman.Core.Services
     public interface IPaymentService : IService<Payment>
     {
 
-    }
+    } 
 }
