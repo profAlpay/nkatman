@@ -8,6 +8,7 @@ using nkatman.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using nkatman.Service.Hashing;
 using Nkatman.API.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Nkatman.API.Controllers
 {
@@ -120,6 +121,7 @@ namespace Nkatman.API.Controllers
 
         }
         [HttpPost("[action]")]
+        [AllowAnonymous]
 
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {

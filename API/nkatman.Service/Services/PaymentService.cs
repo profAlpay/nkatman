@@ -15,5 +15,7 @@ namespace nkatman.Service.Services
         public PaymentService(IGenericRepository<Payment> repository, IUnitOfWorks unitOfWorks) : base(repository, unitOfWorks)
         {
         }
+
+        
     }
 }

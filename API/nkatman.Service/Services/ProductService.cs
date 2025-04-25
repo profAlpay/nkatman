@@ -12,8 +12,20 @@ namespace nkatman.Service.Services
 {
     public class ProductService : Service<Product>, IProductService
     {
-        public ProductService(IGenericRepository<Product> repository, IUnitOfWorks unitOfWorks) : base(repository, unitOfWorks)
+        private readonly IProductRepository _productRepository;
+
+        public ProductService(IGenericRepository<Product> repository, IUnitOfWorks unitOfWorks, IProductRepository productRepository) : base(repository, unitOfWorks)
         {
+            _productRepository = productRepository;
+        }
+
+        public async Task BuyProduct(Product product)
+        {
+            var currentProduct = await _productRepository.GetByIdAsync(product.Id);
+
+            currentProduct.Stock += product.Stock;
+
+            Update(currentProduct);
         }
     }
 }

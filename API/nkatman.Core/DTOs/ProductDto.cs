@@ -12,8 +12,9 @@ namespace nkatman.Core.DTOs
         public string Name { get; set; }
 
         public double UnitPrice { get; set; }
+        public int Stock { get; set; }
 
-        //public List<Sale> Sales { get; set; }
+        public List<Sale>? Sales { get; set; }
 
 
     }

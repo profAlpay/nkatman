@@ -7,6 +7,7 @@ using nkatman.Core.Services;
 using nkatman.Core.Models;
 using Nkatman.API.Filters;
 using nkatman.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Nkatman.API.Controllers
 {
@@ -22,6 +23,7 @@ namespace Nkatman.API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        
         public async Task<IActionResult> All()
         {
             //var groups = _groupService.GetAll().Where(g => g.Name.Contains("Admin")).ToList();

@@ -13,7 +13,7 @@ namespace nkatman.Core.DTOs
 
         public double Amount { get; set; }
 
-       // public CustomerDto Customer { get; set; }
+       public CustomerDto? Customer { get; set; }
 
 
     }

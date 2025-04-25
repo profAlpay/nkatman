@@ -84,6 +84,28 @@ namespace Nkatman.API.Controllers
             return CreateActionResult(response);
         }
 
+        [HttpPost("[Action]")]
+
+        public async Task<IActionResult> BuyProduct(ProductDto productDto)
+        {
+            //get user from token 
+            var userId = 1;
+
+            var processedEntity = _mapper.Map<Product>(productDto);
+
+            processedEntity.UpdateBy = userId;
+
+            processedEntity.CreatedBy = userId;
+
+           await _productService.BuyProduct(processedEntity);
+
+            
+
+            var response = new CustomResponseDto<NoContentDto>().Success(204);
+
+
+            return CreateActionResult(response);
+        }
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productDto)
         {

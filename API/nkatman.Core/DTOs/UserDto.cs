@@ -1,4 +1,6 @@
-﻿namespace nkatman.Core.DTOs
+﻿using nkatman.Core.Models;
+
+namespace nkatman.Core.DTOs
 {
     public class UserDto : BaseDto
     {
@@ -12,9 +14,9 @@
         public int GroupId { get; set; }
 
         
-        //public Department Department { get; set; }
+        public Department? Department { get; set; }
 
-        //public Group Group { get; set; }
+        public Group? Group { get; set; }
 
     }
 }
