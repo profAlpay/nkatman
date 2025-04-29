@@ -22,6 +22,7 @@ namespace Nkatman.API.Controllers
             _groupService = groupService;
             _mapper = mapper;
         }
+        [Authorize("Root,Root.Groups,Root.Groups.Get")]
         [HttpGet]
         
         public async Task<IActionResult> All()
@@ -35,7 +36,7 @@ namespace Nkatman.API.Controllers
             return CreateActionResult(result);
 
         }
-
+        [Authorize("Root,Root.Groups,Root.Groups.Get")]
         [ServiceFilter(typeof(NotFoundFilter<Group>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -47,7 +48,7 @@ namespace Nkatman.API.Controllers
             var nesne = new CustomResponseDto<GroupDto>();
             return CreateActionResult(nesne.Success(200, groupDto));
         }
-
+        [Authorize("Root,Root.Groups,Root.Groups.Delete")]
         [ServiceFilter(typeof(NotFoundFilter<Group>))]
         [HttpGet("[action]")]
         public async Task<IActionResult> Remove(int id)
@@ -61,7 +62,7 @@ namespace Nkatman.API.Controllers
 
             return CreateActionResult(new CustomResponseDto<NoContentDto>().Success(204));
         }
-
+        [Authorize("Root,Root.Groups,Root.Groups.Add")]
         [HttpPost]
 
         public async Task<IActionResult> Save(GroupDto groupDto)

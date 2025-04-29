@@ -63,7 +63,7 @@ namespace Nkatman.API.Controllers
         public async Task<IActionResult> Save(RoleDto roleDto)
         {
             //get user from token 
-            var userId = 1;
+            var userId = GetUserFromToken();
 
             var processedEntity = _mapper.Map<Role>(roleDto);
 

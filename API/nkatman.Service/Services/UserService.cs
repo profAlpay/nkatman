@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace nkatman.Service.Services
 {
@@ -26,7 +28,9 @@ namespace nkatman.Service.Services
 
         public User GetByEmail(string email)
         {
-            User user = _userRepository.Where(x => x.Email == email).FirstOrDefault();
+            User user = _userRepository.Where(u => u.Email == email).Include(u=>u.Group).ThenInclude(g=>g.GroupInRols).ThenInclude(x => x.Role).FirstOrDefault();
+
+            // daha farklı seyler olabilir buraya 
 
             return user ?? user;
         }
@@ -43,12 +47,13 @@ namespace nkatman.Service.Services
 
             result = HashingHelper.VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt);
 
-            List<Role> roles = new List<Role>();
+           
 
             // get roles TODO
 
             if (result)
             {
+                var roles = user.Group.GroupInRols.Select(x => x.Role).ToList();
                 Token token = _tokenHandler.CreateToken(user, roles);
                 return token;
             }
